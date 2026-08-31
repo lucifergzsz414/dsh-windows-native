@@ -1,0 +1,7 @@
+- insert:
+    - id: dsh-windows-native
+      name: dsh-windows-native
+      config:
+        when: windows
+        order: 15
+        extraNotes: ""

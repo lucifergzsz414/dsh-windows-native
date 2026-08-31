@@ -33,6 +33,10 @@ does the WSL side of the same idea well.
   erroring. Write the command to a local file and `scp` it over instead
 - A junction or symlink can fail silently without admin rights / Developer Mode — check
   it actually exists after creating it, don't just trust the exit code
+- `NUL`/`CON`/`PRN`/`AUX`/`COM1-9`/`LPT1-9` are reserved in every directory. Discarding
+  output the Unix way with `> /dev/null` doesn't hit a null device on Windows — it can
+  leave a literal, barely-deletable file named `nul` sitting in the working directory.
+  Use `$null` instead (`> $null`, `| Out-Null`)
 - A file open in Word/Excel/WPS throws a plain PermissionError on write. That's not
   corruption, don't force-retry the same filename
 - `docker run -v "C:\path\file.yaml:/container/path:ro"` can get mis-split — the drive

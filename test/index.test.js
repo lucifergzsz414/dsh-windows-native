@@ -68,6 +68,13 @@ describe("buildText", () => {
     assert.match(text, /scp/);
   });
 
+  it("includes the reserved-device-name / dev-null footgun", () => {
+    const text = buildText();
+    assert.match(text, /NUL/);
+    assert.match(text, /dev\/null/);
+    assert.match(text, /\$null/);
+  });
+
   it("appends extraNotes when provided", () => {
     const text = buildText("custom note here");
     assert.match(text, /Additional operator notes:\ncustom note here/);

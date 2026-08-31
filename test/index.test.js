@@ -56,6 +56,18 @@ describe("buildText", () => {
     assert.match(text, /\.node files/);
   });
 
+  it("includes the Set-Content/Add-Content ANSI-codepage footgun", () => {
+    const text = buildText();
+    assert.match(text, /Set-Content/);
+    assert.match(text, /ANSI codepage/);
+  });
+
+  it("includes the nested-SSH-quoting hang footgun", () => {
+    const text = buildText();
+    assert.match(text, /silently hang/);
+    assert.match(text, /scp/);
+  });
+
   it("appends extraNotes when provided", () => {
     const text = buildText("custom note here");
     assert.match(text, /Additional operator notes:\ncustom note here/);

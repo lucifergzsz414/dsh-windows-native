@@ -25,6 +25,12 @@ does the WSL side of the same idea well.
   errors="replace"` explicitly
 - `.bat` file *contents* have to stay ASCII (cmd.exe pre-scans them and can corrupt
   UTF-8/GBK before anything runs — filenames are fine, the script body isn't)
+- `Set-Content`/`Add-Content` write files using the system ANSI codepage by default,
+  not UTF-8 — Chinese text written through either without `-Encoding utf8` can end up
+  corrupted on disk, not just on screen
+- Nested quotes in an SSH command forwarded from PowerShell (`ssh host "sudo python3
+  -c \"...\""`) can hang silently for minutes past one level of nesting instead of
+  erroring. Write the command to a local file and `scp` it over instead
 - A junction or symlink can fail silently without admin rights / Developer Mode — check
   it actually exists after creating it, don't just trust the exit code
 - A file open in Word/Excel/WPS throws a plain PermissionError on write. That's not

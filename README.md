@@ -33,6 +33,9 @@ does the WSL side of the same idea well.
   letter's colon looks like another separator. The mount silently fails, the container
   still reports healthy, and it just runs on defaults. `docker exec` in and check the
   file before blaming the application code
+- Native (`.node`) npm bindings built here are Windows binaries. Shipping them to a
+  Linux server crashes it at runtime even though `npm install` and the local build both
+  reported success — check for "PE32+"/"MS Windows" with `file` before shipping
 - Killing the outer process (a task runner, a job wrapper) doesn't free the port if the
   real node/python process underneath is still alive — you end up hitting a stale
   server and think your fix didn't work. Find the real PID and kill that

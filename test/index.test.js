@@ -50,6 +50,12 @@ describe("buildText", () => {
     assert.match(text, /silently fails/);
   });
 
+  it("includes the cross-platform native-module footgun", () => {
+    const text = buildText();
+    assert.match(text, /PE32\+/);
+    assert.match(text, /\.node files/);
+  });
+
   it("appends extraNotes when provided", () => {
     const text = buildText("custom note here");
     assert.match(text, /Additional operator notes:\ncustom note here/);

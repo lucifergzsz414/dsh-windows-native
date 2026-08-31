@@ -2,6 +2,7 @@
   "name": "dsh-windows-native",
   "version": "0.1.0",
   "description": "Tells DeepSeek Harness the shell rules for native Windows (no WSL) — PowerShell syntax, console encoding, junction/file-lock gotchas.",
+  "author": "lucifergzsz414",
   "license": "MIT",
   "repository": {
     "type": "git",

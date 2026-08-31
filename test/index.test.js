@@ -44,6 +44,12 @@ describe("buildText", () => {
     assert.match(text, /errors="replace"/);
   });
 
+  it("includes the docker bind-mount drive-letter-colon footgun", () => {
+    const text = buildText();
+    assert.match(text, /docker run/);
+    assert.match(text, /silently fails/);
+  });
+
   it("appends extraNotes when provided", () => {
     const text = buildText("custom note here");
     assert.match(text, /Additional operator notes:\ncustom note here/);

@@ -29,6 +29,10 @@ does the WSL side of the same idea well.
   it actually exists after creating it, don't just trust the exit code
 - A file open in Word/Excel/WPS throws a plain PermissionError on write. That's not
   corruption, don't force-retry the same filename
+- `docker run -v "C:\path\file.yaml:/container/path:ro"` can get mis-split — the drive
+  letter's colon looks like another separator. The mount silently fails, the container
+  still reports healthy, and it just runs on defaults. `docker exec` in and check the
+  file before blaming the application code
 - Killing the outer process (a task runner, a job wrapper) doesn't free the port if the
   real node/python process underneath is still alive — you end up hitting a stale
   server and think your fix didn't work. Find the real PID and kill that

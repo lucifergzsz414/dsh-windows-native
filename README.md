@@ -19,6 +19,10 @@ does the WSL side of the same idea well.
   though the actual data is fine — don't trust what you see printed
 - Don't feed multi-line non-ASCII text through an inline heredoc or `-c "..."` — write
   it to a file first, then run the file
+- Python's `subprocess.run(..., text=True)` decodes child output using the system
+  locale — GBK on a Chinese Windows install, not UTF-8. A subprocess that ran fine can
+  still blow up with `UnicodeDecodeError` on its own output. Pass `encoding="utf-8",
+  errors="replace"` explicitly
 - `.bat` file *contents* have to stay ASCII (cmd.exe pre-scans them and can corrupt
   UTF-8/GBK before anything runs — filenames are fine, the script body isn't)
 - A junction or symlink can fail silently without admin rights / Developer Mode — check

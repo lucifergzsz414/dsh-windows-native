@@ -37,6 +37,13 @@ describe("buildText", () => {
     assert.match(text, /CREATE_NO_WINDOW/);
   });
 
+  it("includes the subprocess.run(text=True) GBK-decode footgun", () => {
+    const text = buildText();
+    assert.match(text, /subprocess\.run/);
+    assert.match(text, /GBK/);
+    assert.match(text, /errors="replace"/);
+  });
+
   it("appends extraNotes when provided", () => {
     const text = buildText("custom note here");
     assert.match(text, /Additional operator notes:\ncustom note here/);

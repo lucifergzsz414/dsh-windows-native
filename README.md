@@ -54,3 +54,7 @@ extraNotes: ""   # your own notes, appended after the built-in list
 Early, and the list is exactly as long as my own scar tissue — not a survey of every
 Windows footgun that exists. If you hit something this plugin should have warned you
 about, open a PR with the actual failure you saw, not a guess at what might go wrong.
+
+Tested against `@deepseek-ai/dsh` `0.1.1-rc.2` — installed it locally as a `file:`
+dependency, checked `dsh --dump-config` to confirm it's picked up, then actually asked
+the running agent a question and watched the injected text come back in its answer.
